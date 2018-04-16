@@ -7,24 +7,24 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-public class MovieActivity extends AppCompatActivity {
-    ImageView Picture;
+public class EventActivity extends AppCompatActivity {
+    ImageView picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
-        Picture = findViewById(R.id.imageView3);
+        setContentView(R.layout.activitie_event);
+        picture = findViewById(R.id.imageView3);
 
-        Movie movie =(Movie) getIntent().getSerializableExtra("MOVIE");
-        getSupportActionBar().setTitle(movie.Title);
+        Event event =(Event) getIntent().getSerializableExtra("EVENT");
+        getSupportActionBar().setTitle(event.name);
 
-        String picture = "https://image.tmdb.org/t/p/original" + movie.posterPath ;
+        String picture = "https://image.tmdb.org/t/p/original" + event.picture1 ;
         Glide.with(this)
                 .load(picture)
                 .apply(RequestOptions.centerCropTransform())
-                .into(Picture);
+                .into(this.picture);
 
     }
 }

@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-public class MovieAdapter extends RecyclerView.Adapter<viewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
 
 
     Context context;
-    public MovieAdapter(Context context){
+
+    public EventAdapter(Context context){
         this.context = context;
     }
 
@@ -28,11 +29,11 @@ public class MovieAdapter extends RecyclerView.Adapter<viewHolder> {
 
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
-        final Movie movie = Database.MOVIES[position];
-        String title = movie.Title;
-        String moovie = movie.posterPath;
+        final Event event = Database.EVENTS[position];
+        String title = event.name;
+        String eevent = event.picture1;
         holder.titleTextView.setText(title);
-        String picture = "https://image.tmdb.org/t/p/original" + moovie ;
+        String picture = "https://image.tmdb.org/t/p/original" + eevent ;
         Glide.with(context)
                 .load(picture)
                 .apply(RequestOptions.centerCropTransform())
@@ -40,7 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<viewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startMovieActivity(movie);
+                startEventActivity(event);
             }
         });
 
@@ -48,12 +49,12 @@ public class MovieAdapter extends RecyclerView.Adapter<viewHolder> {
 
     @Override
     public int getItemCount() {
-        return Database.MOVIES.length;
+        return Database.EVENTS.length;
     }
 
-    private void startMovieActivity(Movie movie){
-        Intent intent = new Intent(context, MovieActivity.class);
-        intent.putExtra("MOVIE",movie );
+    private void startEventActivity(Event event){
+        Intent intent = new Intent(context, EventActivity.class);
+        intent.putExtra("EVENT", event );
         context.startActivity(intent);
 
     }

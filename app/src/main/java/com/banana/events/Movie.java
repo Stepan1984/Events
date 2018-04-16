@@ -11,9 +11,4 @@ public class Movie implements Serializable {
         Title = title;
         this.posterPath = posterPath;
     }
-
-
-
-
-
 }
