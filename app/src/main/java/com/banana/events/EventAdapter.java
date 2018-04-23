@@ -14,10 +14,10 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
 
 
-    Context context;
+    MainActivity activity;
 
-    public EventAdapter(Context context){
-        this.context = context;
+    public EventAdapter(MainActivity activity){
+        MainActivity a
     }
 
     @Override
@@ -51,11 +51,10 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
     public int getItemCount() {
         return Database.EVENTS.length;
     }
+    private void showEventFragment(Event event){
+        EventFragment fragment = EventFragment.newInstance(event);
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
-    private void startEventActivity(Event event){
-        Intent intent = new Intent(context, EventActivity.class);
-        intent.putExtra("EVENT", event );
-        context.startActivity(intent);
 
     }
 }
