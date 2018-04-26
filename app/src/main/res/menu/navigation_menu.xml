@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/group_1"
+        android:title="Заголовок номер один"
+        >
+
+        <menu>
+            <group
+                android:checkableBehavior="single"
+                >
+
+                <item
+                    android:icon="@drawable/ic_archive_black_24dp"
+                    android:title="Пункт номер один" />
+
+                <item
+                    android:icon="@drawable/ic_brightness_high_black_24dp"
+                    android:title="Пункт номер два" />
+            </group>
+        </menu>
+    </item>
+</menu>

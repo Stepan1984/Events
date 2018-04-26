@@ -17,12 +17,12 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
     MainActivity activity;
 
     public EventAdapter(MainActivity activity){
-        MainActivity a
+       this.activity = activity;
     }
 
     @Override
     public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         View view =inflater.inflate(R.layout.maket1, parent, false);
         return new viewHolder(view);
     }
@@ -34,14 +34,14 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
         String eevent = event.picture1;
         holder.titleTextView.setText(title);
         String picture = "https://image.tmdb.org/t/p/original" + eevent ;
-        Glide.with(context)
+        Glide.with(activity)
                 .load(picture)
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.Image_View);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startEventActivity(event);
+                showEventFragment(event);
             }
         });
 
@@ -51,10 +51,10 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
     public int getItemCount() {
         return Database.EVENTS.length;
     }
-    private void showEventFragment(Event event){
+
+     private void showEventFragment(Event event){
         EventFragment fragment = EventFragment.newInstance(event);
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-
-
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
     }
+
 }

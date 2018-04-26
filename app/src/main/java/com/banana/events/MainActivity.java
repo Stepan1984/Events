@@ -3,6 +3,8 @@ package com.banana.events;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, new EventsFragment(), null)
+                    .commit();
+        }
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 // устанавливаем для неё картинку
@@ -34,12 +44,20 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0); // создаём штуку, которая будет анимировать иконку (и не только)
         mDrawerLayout.addDrawerListener(mDrawerToggle); // подписываем её на события открытия и закрытия дровера (чтобы она знала, когда нужно анимировать кнопку)
 
-        Context context = MainActivity.this;
+        NavigationView navigationView = findViewById(R.id.navigation_view); // находим вьюху
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) { // если выбрали пункт
+ //                   case : finish // выход
+ //                       finish(); // закрываем активность
+ //                       return true; // возвращаем true, мол, обработали нажатие
+                    default: // иначе
+                        return false; // возврващаем false, мол, этот пункт меню не поддерживаем
+                }
+            }
+        });
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        EventAdapter adapter = new EventAdapter(MainActivity.this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
     }
     @Override
@@ -72,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+
 
 
 
