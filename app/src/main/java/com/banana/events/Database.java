@@ -57,7 +57,7 @@ public class Database {
             for (int i = 0; i < events.length(); ++i) {
                 JSONObject event = events.getJSONObject(i);
                 String title = event.getJSONObject("name").getString("text");
-                String posterPath = event.getJSONObject("original").getString("url");
+                String posterPath = event.getJSONObject("logo").getJSONObject("original").getString("url");
                 Event event01 = new Event(title, posterPath);
                 EVENTS.add(event01);
             }
