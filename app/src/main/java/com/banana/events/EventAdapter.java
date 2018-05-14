@@ -29,7 +29,7 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
-        final Event event = Database.EVENTS[position];
+        final Event event = Database.EVENTS.get(position);
         String title = event.name;
         String eevent = event.picture1;
         holder.titleTextView.setText(title);
@@ -47,9 +47,9 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
     }
 
-    @Override
+
     public int getItemCount() {
-        return Database.EVENTS.length;
+        return Database.EVENTS.size();
     }
 
      private void showEventFragment(Event event){
