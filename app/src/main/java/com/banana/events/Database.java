@@ -20,7 +20,7 @@ import okhttp3.Response;
 
 public class Database {
 
-    public static final String DATA_URL ="https://www.eventbriteapi.com/v3/events/search/?location.latitude=+59.8944444&location.longitude=30.2641667&token=75CVUEYPMPG7WHIHFMNE";
+    public static final String DATA_URL ="https://www.eventbriteapi.com/v3/events/search/?location.latitude=+59.8944444&location.longitude=40.2641667&token=75CVUEYPMPG7WHIHFMNE";
     // массив (список) с данными
     public static final List<Event> EVENTS = new ArrayList<>();
 
