@@ -3,6 +3,8 @@ package com.banana.events;
 import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +22,7 @@ import okhttp3.Response;
 
 public class Database {
 
-    public static final String DATA_URL ="https://www.eventbriteapi.com/v3/events/search/?location.latitude=+59.8944444&location.longitude=40.2641667&token=75CVUEYPMPG7WHIHFMNE";
+    public static final String DATA_URL ="https://www.eventbriteapi.com/v3/events/search/?q=I.EYE%C2%A0&sort_by=best&location.latitude=40.730610&location.longitude=+-73.935242&token=75CVUEYPMPG7WHIHFMNE";
     // массив (список) с данными
     public static final List<Event> EVENTS = new ArrayList<>();
 
@@ -49,6 +51,7 @@ public class Database {
 
         });
     }
+
     public static void parse(String data) {
         try {
             //создаём корневой json-обЪект
@@ -57,9 +60,21 @@ public class Database {
             for (int i = 0; i < events.length(); ++i) {
                 JSONObject event = events.getJSONObject(i);
                 String title = event.getJSONObject("name").getString("text");
-                String posterPath = event.getJSONObject("logo").getJSONObject("original").getString("url");
-                Event event01 = new Event(title, posterPath);
+                String url = null;
+                if (event.has("logo") && !event.get("logo").toString().equals("null")) {
+                    Log.v("GUB", "? " + event.get("logo"));
+                    JSONObject logo = event.getJSONObject("logo");
+                    if (logo.has("original")){
+                        JSONObject original = logo.getJSONObject("original");
+                        if (original.has("url")){
+                            url = original.getString("url");
+                        }
+                    }
+                }
+                Event event01 = new Event(title, url);
                 EVENTS.add(event01);
+
+
             }
             EventBus.getDefault().post(new OnMovieChangedEvent());
         } catch (JSONException e) {
@@ -71,7 +86,6 @@ public class Database {
      * Класс события внесения в базу данных изменений.
      */
     public static class OnMovieChangedEvent {}
-
 
 
 

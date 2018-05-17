@@ -16,8 +16,13 @@ import com.banana.events.EventAdapter;
 import com.banana.events.MainActivity;
 import com.banana.events.R;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 public class EventsFragment extends android.support.v4.app.Fragment {
 
+    EventAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,11 +32,31 @@ public class EventsFragment extends android.support.v4.app.Fragment {
 
         Activity activity = getActivity();
 
-        EventAdapter adapter = new EventAdapter((MainActivity) activity);
+
+
+        adapter = new EventAdapter((MainActivity) activity);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
 
         return view;
+
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(Database.OnMovieChangedEvent event) {
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(EventsFragment.this);
+    }
+
+
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(EventsFragment.this);
+    }
+
 }
