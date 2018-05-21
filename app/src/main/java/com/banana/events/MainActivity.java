@@ -1,5 +1,6 @@
 package com.banana.events;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -50,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) { // если выбрали пункт
- //                   case : finish // выход
- //                       finish(); // закрываем активность
- //                       return true; // возвращаем true, мол, обработали нажатие
+                   case R.id.item1 :  // выход
+                       EventsFragment fragment = EventsFragment.newInstance();
+                       MainActivity.this.getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                       mDrawerLayout.closeDrawer(Gravity.LEFT);
+                       return true; // возвращаем true, мол, обработали нажатие
+                    case R.id.item2 :
+                        finish();
+                        return  true;
                     default: // иначе
                         return false; // возврващаем false, мол, этот пункт меню не поддерживаем
                 }
@@ -91,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
 
 
 

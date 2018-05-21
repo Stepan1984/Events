@@ -15,7 +15,7 @@ public class EventActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitie_event);
-        picture = findViewById(R.id.imageView3);
+        picture = findViewById(R.id.image_event);
 
         Event event =(Event) getIntent().getSerializableExtra("EVENT");
         getSupportActionBar().setTitle(event.name);

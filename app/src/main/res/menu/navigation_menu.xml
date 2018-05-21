@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/group_1"
-        android:title="Заголовок номер один"
+        android:title="меню"
         >
 
         <menu>
@@ -15,12 +15,14 @@
                 >
 
                 <item
-                    android:icon="@drawable/ic_archive_black_24dp"
-                    android:title="Пункт номер один" />
+                    android:id="@+id/item1"
+                    android:icon="@drawable/ic_home_black_24dp"
+                    android:title="Главный экран" />
 
                 <item
-                    android:icon="@drawable/ic_brightness_high_black_24dp"
-                    android:title="Пункт номер два" />
+                    android:id="@+id/item2"
+                    android:icon="@drawable/ic_cancel_black_24dp"
+                    android:title="Выйти из приложения" />
             </group>
         </menu>
     </item>

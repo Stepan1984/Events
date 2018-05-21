@@ -22,6 +22,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class EventsFragment extends android.support.v4.app.Fragment {
 
+
+
     EventAdapter adapter;
     @Nullable
     @Override
@@ -57,6 +59,13 @@ public class EventsFragment extends android.support.v4.app.Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(EventsFragment.this);
+    }
+    public static EventsFragment newInstance (){
+        EventsFragment fragment = new EventsFragment();
+        Bundle arguments = new Bundle();;
+        fragment.setArguments(arguments);
+
+        return fragment;
     }
 
 }
