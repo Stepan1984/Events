@@ -1,5 +1,6 @@
 package com.banana.events;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,12 +24,20 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class EventFragment extends Fragment {
+    Event event;
     TextView name;
     ImageView imageEvent;
 
 
+
+
+    public EventFragment(){
+
+    }
+
+
     public static EventFragment newInstance (Event event){
-        EventFragment fragment = new EventFragment();
+        EventFragment fragment = EventFragment.newInstance(event);
         Bundle arguments = new Bundle();
         arguments.putSerializable("EVENT",event);
         fragment.setArguments(arguments);
@@ -43,12 +52,14 @@ public class EventFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container,false);
         name = view.findViewById(R.id.name);
-        imageEvent = view.findViewById(R.id.image_event);
+        imageEvent = view.findViewById(R.id.imageEvent);
+
+
 
         Event event =(Event) getArguments().getSerializable("EVENT");
         MainActivity activity = (MainActivity) getActivity();
         activity.getSupportActionBar().setTitle(event.name);
-        //ActionBar actionBar = getSupportActionBar();
+        
 
 
         return view;

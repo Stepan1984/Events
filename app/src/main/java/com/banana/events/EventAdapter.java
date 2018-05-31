@@ -2,6 +2,7 @@ package com.banana.events;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +25,12 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
     public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(activity);
         View view =inflater.inflate(R.layout.maket1, parent, false);
+        viewHolder viewHolder = new viewHolder(view);
         return new viewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(viewHolder holder, int position) {
+    public void onBindViewHolder(viewHolder holder, final int position) {
         final Event event = Database.EVENTS.get(position);
         String title = event.name;
         String eevent = event.picture1;
@@ -41,6 +43,7 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Event event = Database.EVENTS.get(position);
                 showEventFragment(event);
             }
         });
@@ -53,8 +56,8 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
     }
 
      private void showEventFragment(Event event){
-        EventFragment fragment = EventFragment.newInstance(event);
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+         EventFragment fragment = EventFragment.newInstance(event);
+         activity.getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
     }
 
 }

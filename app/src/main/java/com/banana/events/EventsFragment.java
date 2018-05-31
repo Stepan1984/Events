@@ -45,10 +45,6 @@ public class EventsFragment extends android.support.v4.app.Fragment {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(Database.OnMovieChangedEvent event) {
-        adapter.notifyDataSetChanged();
-    }
 
     public void onStart() {
         super.onStart();
@@ -60,6 +56,14 @@ public class EventsFragment extends android.support.v4.app.Fragment {
         super.onStop();
         EventBus.getDefault().unregister(EventsFragment.this);
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(Database.OnMovieChangedEvent event) {
+        adapter.notifyDataSetChanged();
+    }
+
+
     public static EventsFragment newInstance (){
         EventsFragment fragment = new EventsFragment();
         Bundle arguments = new Bundle();;
