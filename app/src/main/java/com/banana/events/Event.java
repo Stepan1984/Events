@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Event implements Serializable {
     public String name;
-    public double latitude; //широта
+    public String location;
     public double longitude; //долгота
     public String picture1;
 

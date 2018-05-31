@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.banana.events.Event;
 import com.banana.events.Movie;
+import com.bumptech.glide.Glide;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -59,7 +60,8 @@ public class EventFragment extends Fragment {
         Event event =(Event) getArguments().getSerializable("EVENT");
         MainActivity activity = (MainActivity) getActivity();
         activity.getSupportActionBar().setTitle(event.name);
-        
+        Glide.with(this).load(event.picture1).into(imageEvent);
+
 
 
         return view;
