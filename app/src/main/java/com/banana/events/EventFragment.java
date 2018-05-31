@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class EventFragment extends Fragment {
     Event event;
-    TextView name;
+    TextView description1;
     ImageView imageEvent;
 
 
@@ -38,7 +38,7 @@ public class EventFragment extends Fragment {
 
 
     public static EventFragment newInstance (Event event){
-        EventFragment fragment = EventFragment.newInstance(event);
+        EventFragment fragment = new EventFragment();
         Bundle arguments = new Bundle();
         arguments.putSerializable("EVENT",event);
         fragment.setArguments(arguments);
@@ -52,7 +52,7 @@ public class EventFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container,false);
-        name = view.findViewById(R.id.name);
+        description1 = view.findViewById(R.id.name);
         imageEvent = view.findViewById(R.id.imageEvent);
 
 
@@ -61,6 +61,7 @@ public class EventFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         activity.getSupportActionBar().setTitle(event.name);
         Glide.with(this).load(event.picture1).into(imageEvent);
+        description1.setText(event.discription);
 
 
 

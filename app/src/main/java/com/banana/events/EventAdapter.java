@@ -35,9 +35,8 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
         String title = event.name;
         String eevent = event.picture1;
         holder.titleTextView.setText(title);
-        String picture = "https://image.tmdb.org/t/p/original" + eevent ;
         Glide.with(activity)
-                .load(picture)
+                .load(eevent)
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.Image_View);
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -60,6 +60,7 @@ public class Database {
             for (int i = 0; i < events.length(); ++i) {
                 JSONObject event = events.getJSONObject(i);
                 String title = event.getJSONObject("name").getString("text");
+                String description = event.getJSONObject("description").getString("text");
                 String url = null;
                 if (event.has("logo") && !event.get("logo").toString().equals("null")) {
                     Log.v("GUB", "? " + event.get("logo"));
@@ -71,7 +72,7 @@ public class Database {
                         }
                     }
                 }
-                Event event01 = new Event(title, url);
+                Event event01 = new Event(title, url, description);
                 EVENTS.add(event01);
 
 
