@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
-
+    public List<Event> events = new ArrayList<>();
 
     MainActivity activity;
 
@@ -31,7 +34,7 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
     @Override
     public void onBindViewHolder(viewHolder holder, final int position) {
-        final Event event = Database.EVENTS.get(position);
+        final Event event = events.get(position);
         String title = event.name;
         String eevent = event.picture1;
         holder.titleTextView.setText(title);
@@ -42,7 +45,7 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Event event = Database.EVENTS.get(position);
+                Event event = events.get(position);
                 showEventFragment(event);
             }
         });
@@ -51,7 +54,7 @@ public class EventAdapter extends RecyclerView.Adapter<viewHolder> {
 
 
     public int getItemCount() {
-        return Database.EVENTS.size();
+        return events.size();
     }
 
      private void showEventFragment(Event event){

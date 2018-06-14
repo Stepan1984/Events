@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.banana.events.R;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 public class EventsFragment extends android.support.v4.app.Fragment {
 
@@ -60,6 +63,20 @@ public class EventsFragment extends android.support.v4.app.Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(Database.OnMovieChangedEvent event) {
+        adapter.events = Database.EVENTS;
+        adapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(FilterActivity.OnFilterChangedEvent event) {
+        Log.v("PRIVET", "onlyFree=" + event.onlyFree);
+        ArrayList<Event> a = new ArrayList<>();
+        for(Event e : Database.EVENTS){
+            if(e.eventCost == event.onlyFree){
+                a.add(e);
+            }
+        }
+        adapter.events = a;
         adapter.notifyDataSetChanged();
     }
 

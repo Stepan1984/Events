@@ -1,7 +1,5 @@
 package com.banana.events;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
@@ -11,11 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item2 :
                         finish();
                         return  true;
+                    case R.id.item3 :
+                        Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                        startActivity(intent);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT);
+                        return true;
                     default: // иначе
                         return false; // возврващаем false, мол, этот пункт меню не поддерживаем
                 }

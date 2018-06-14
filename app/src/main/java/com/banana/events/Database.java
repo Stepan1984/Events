@@ -62,6 +62,7 @@ public class Database {
                 String title = event.getJSONObject("name").getString("text");
                 String description = event.getJSONObject("description").getString("text");
                 String url = null;
+                boolean cost = event.getBoolean("is_free");
                 if (event.has("logo") && !event.get("logo").toString().equals("null")) {
                     Log.v("GUB", "? " + event.get("logo"));
                     JSONObject logo = event.getJSONObject("logo");
@@ -72,7 +73,7 @@ public class Database {
                         }
                     }
                 }
-                Event event01 = new Event(title, url, description);
+                Event event01 = new Event(title, url, description, cost);
                 EVENTS.add(event01);
 
 

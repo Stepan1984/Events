@@ -28,6 +28,7 @@ public class EventFragment extends Fragment {
     Event event;
     TextView description1;
     ImageView imageEvent;
+    ImageView dollar;
 
 
 
@@ -54,6 +55,7 @@ public class EventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event, container,false);
         description1 = view.findViewById(R.id.name);
         imageEvent = view.findViewById(R.id.imageEvent);
+        dollar = view.findViewById(R.id.imageDollar);
 
 
 
@@ -62,6 +64,11 @@ public class EventFragment extends Fragment {
         activity.getSupportActionBar().setTitle(event.name);
         Glide.with(this).load(event.picture1).into(imageEvent);
         description1.setText(event.discription);
+        if (event.eventCost == false){
+            dollar.setVisibility(View.VISIBLE);
+        }else{
+            dollar.setVisibility(View.GONE);
+        }
 
 
 

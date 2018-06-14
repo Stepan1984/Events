@@ -23,6 +23,10 @@
                     android:id="@+id/item2"
                     android:icon="@drawable/ic_cancel_black_24dp"
                     android:title="Выйти из приложения" />
+                <item
+                    android:id="@+id/item3"
+                    android:icon="@drawable/ic_cancel_black_24dp"
+                    android:title="фильтры" />
             </group>
         </menu>
     </item>
